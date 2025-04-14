@@ -53,6 +53,8 @@ services:
     volumes:
       - ./payments-ms/src:/usr/src/app/src
     command: npm run start:dev
+    ports:
+      - ${PAYMENTS_PORT}:${PAYMENTS_PORT}
     environment:
       - PORT=${PAYMENTS_PORT}
       - NATS_SERVERS=nats://nats-server:4222

@@ -14,7 +14,7 @@ services:
     environment:
       - PORT=3000
       - NATS_SERVERS=nats://nats-server:4222
-  
+
   products-ms:
     build: ./products-ms
     volumes:
@@ -47,3 +47,16 @@ services:
       POSTGRES_PASSWORD: ${RES_PASSWORD}
     volumes:
       - ./orders-ms/postgres:/var/lib/postgresql/data
+
+  payments-ms:
+    build: ./payments-ms
+    volumes:
+      - ./payments-ms/src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      - PORT=${PAYMENTS_PORT}
+      - NATS_SERVERS=nats://nats-server:4222
+      - STRIPE_SECRET=${STRIPE_SECRET}
+      - ENDPOINT_SECRET=${ENDPOINT_SECRET}
+      - SUCCESS_URL=${SUCCESS_URL},
+      - CANCEL_URL=${CANCEL_URL},

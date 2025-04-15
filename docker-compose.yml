@@ -41,8 +41,8 @@ services:
     container_name: postgres
     image: postgres:16.8-alpine3.20
     restart: always
-    # ports:
-    #   - 5432:5432
+    ports:
+      - 5432:5432
     environment:
       POSTGRES_PASSWORD: ${RES_PASSWORD}
     volumes:

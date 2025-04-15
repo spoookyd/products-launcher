@@ -60,5 +60,5 @@ services:
       - NATS_SERVERS=nats://nats-server:4222
       - STRIPE_SECRET=${STRIPE_SECRET}
       - ENDPOINT_SECRET=${ENDPOINT_SECRET}
-      - SUCCESS_URL=${SUCCESS_URL},
-      - CANCEL_URL=${CANCEL_URL},
+      - SUCCESS_URL=${SUCCESS_URL}
+      - CANCEL_URL=${CANCEL_URL}

@@ -62,3 +62,26 @@ services:
       - ENDPOINT_SECRET=${ENDPOINT_SECRET}
       - SUCCESS_URL=${SUCCESS_URL}
       - CANCEL_URL=${CANCEL_URL}
+
+  auth-ms:
+    depends_on:
+      - auth-db
+    build: ./auth-ms
+    volumes:
+      - ./auth-ms/src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      - NATS_SERVERS=nats://nats-server:4222
+      - DATABASE_URL=postgresql://postgres:arieldelg@auth-db:5432/auth?schema=public
+      - JWT_SECRET=${JWT_SECRET}
+
+  auth-db:
+    container_name: auth-postgres
+    image: postgres:16.8-alpine3.20
+    restart: always
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_PASSWORD: arieldelg
+    volumes:
+      - ./auth-ms/postgres:/var/lib/postgresql/data

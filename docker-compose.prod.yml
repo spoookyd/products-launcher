@@ -6,7 +6,7 @@ services:
     build:
       context: ./client-gateway
       dockerfile: dockerfile.prod
-    image: client-gateway-prod
+    image: northamerica-south1-docker.pkg.dev/microservices-457023/image-registry/client-gateway
     ports:
       - ${CLIENT_GATEWAY_PORT}:${CLIENT_GATEWAY_PORT}
     environment:
@@ -19,7 +19,7 @@ services:
       dockerfile: dockerfile.prod
       args: # es un argumento en contruccion no una env
         - AUTH_DATABASE_URL=${AUTH_DATABASE_URL}
-    image: auth-ms-prod
+    image: northamerica-south1-docker.pkg.dev/microservices-457023/image-registry/auth-ms
     environment:
       - NATS_SERVERS=${NATS_SERVERS}
       - DATABASE_URL=${AUTH_DATABASE_URL}
@@ -29,7 +29,7 @@ services:
     build:
       context: ./products-ms
       dockerfile: dockerfile.prod
-    image: products-ms-prod
+    image: northamerica-south1-docker.pkg.dev/microservices-457023/image-registry/products-ms
     environment:
       - PORT=${PRODUCTS_PORT}
       - NATS_SERVERS=${NATS_SERVERS}
@@ -39,7 +39,7 @@ services:
     build:
       context: ./payments-ms
       dockerfile: dockerfile.prod
-    image: payments-ms-prod
+    image: northamerica-south1-docker.pkg.dev/microservices-457023/image-registry/payments-ms
     ports:
       - ${PAYMENTS_PORT}:${PAYMENTS_PORT}
     environment:
@@ -56,7 +56,7 @@ services:
       dockerfile: dockerfile.prod
       args: # es un argumento en contruccion no una env
         - ORDERS_DATABASE_URL=${ORDERS_DATABASE_URL}
-    image: order-ms-prod
+    image: northamerica-south1-docker.pkg.dev/microservices-457023/image-registry/orders-ms
     environment:
       - PORT=${ORDERS_PORT}
       - NATS_SERVERS=${NATS_SERVERS}
